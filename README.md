@@ -173,8 +173,8 @@ The `Fabrication/` directory is intended for files required to reproduce the phy
 
 ```text
 Fabrication/
-├── Gerbers/
-└── BOM/
+├── final_gerbers.zip
+└── bom.csv
 ```
 
 ### Gerbers
@@ -188,7 +188,7 @@ The BOM lists the components required to assemble the board, including their ref
 A CSV BOM can be placed in:
 
 ```text
-Fabrication/BOM/
+Fabrication/bom.csv
 ```
 
 ## Repository Structure
@@ -206,8 +206,8 @@ ESP32-Prototyping-Breakout/
 │   └── pcb_esp32_v1.kicad_pcb
 │
 ├── Fabrication/
-│   ├── Gerbers/
-│   └── BOM/
+│   ├── final_gerbers.zip
+│   └── bom.csv
 │
 ├── Documentation/
 │   └── Pinout.md
