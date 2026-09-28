@@ -1,0 +1,38 @@
+# KiCad backup / lock / preference files
+*.bak
+*.lck
+*.kicad_prl
+
+# KiCad backup files
+*.kicad_sch-bak
+*.kicad_pcb-bak
+*.kicad_pro-bak
+
+# KiCad temporary files
+~*
+*.tmp
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# VS Code / IDE files
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Build/output directories
+build/
+dist/
+out/

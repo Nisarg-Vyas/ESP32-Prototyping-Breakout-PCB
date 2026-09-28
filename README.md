@@ -32,11 +32,11 @@ The larger ESP32 board occupies a significant area of the breadboard, limiting c
 
 ## Features
 
-- ESP32 GPIO breakout through multiple 2.54 mm header rows
+- ESP32 pin breakout through multiple 2.54 mm header rows
 - Dedicated GND connections
 - Dedicated 5 V connections
 - Dedicated 3.3 V connections
-- USB Type-C power input
+- USB Type-C input circuit on the PCB
 - USB Type-C CC resistors
 - AMS1117-3.3 V linear regulator
 - Regulator input/output capacitors
@@ -46,7 +46,9 @@ The larger ESP32 board occupies a significant area of the breadboard, limiting c
 - Through-hole headers with SMD supporting circuitry
 - Designed for multiple ESP32 development-board form factors
 - Compact custom PCB: approximately **87.62 mm × 70 mm**
-- PCB layout completed with no unrouted connections in the final KiCad design
+- Final PCB layout completed with no unrouted connections in KiCad
+
+> **Note:** The USB Type-C connector itself has not yet been sourced by me, so it is **not soldered onto the current physical PCB**. The connector footprint and supporting circuitry are present in the PCB design, but the current prototype does not have the Type-C connector populated.
 
 ## Hardware Design
 
@@ -90,7 +92,7 @@ The schematic is divided into:
 
 The board was designed in **KiCad**.
 
-The layout contains multiple parallel ESP32 header rows so that the GPIO connections remain accessible while the ESP32 is mounted on the board.
+The layout contains multiple parallel ESP32 header rows so that the ESP32 connections remain accessible while the ESP32 is mounted on the board.
 
 The final PCB has:
 
@@ -98,34 +100,61 @@ The final PCB has:
 - 2.54 mm header spacing
 - SMD power/regulator circuitry
 - Through-hole ESP32/header connections
-- USB Type-C input
+- USB Type-C footprint and supporting circuit
 - Dedicated power and ground access
 
 ## Physical Board
 
 ### PCB without ESP32
 
-![PCB without ESP32](Images/05_pcb_front.jpg)
+![PCB front](Images/05_pcb_front.jpg)
 
 The board exposes the ESP32 connections through the surrounding header rows.
 
 ### PCB with larger ESP32
 
-![PCB with larger ESP32](Images/02_pcb_with_esp32_form_factor_1.jpg)
+![Larger ESP32 on PCB](Images/02_pcb_with_esp32_form_factor_1.jpg)
 
 The larger ESP32 development board fits into the central position while leaving the breakout headers accessible.
 
 ### PCB with smaller ESP32
 
-![PCB with smaller ESP32](Images/03_pcb_with_esp32_form_factor_2.jpg)
+![Smaller ESP32 on PCB](Images/03_pcb_with_esp32_form_factor_2.jpg)
 
 The board was also designed to accommodate a smaller ESP32 development-board form factor.
 
-### Comparison with a Breadboard
+### ESP32 on a Breadboard
 
-![ESP32 on Breadboard](Images/04_large_esp32_on_breadboard.jpg)
+![ESP32 on breadboard](Images/04_large_esp32_on_breadboard.jpg)
 
-This comparison illustrates the original motivation for the project: using a large ESP32 board directly on a breadboard can make access to both sides inconvenient.
+This comparison illustrates the original motivation for the project: using a larger ESP32 board directly on a breadboard can make access to both sides inconvenient.
+
+### Back of the PCB
+
+![PCB back](Images/06_pcb_back.jpg)
+
+The back side shows the routing and the first-board markings:
+
+> PCB #1 — 12+ hours  
+> NV • ESP32 Proto v1 • 08/07/2026  
+> May the traces be with you
+
+## Pinout
+
+The header arrangement uses the **ESP32 module pin numbers** used in the KiCad schematic.
+
+The pinout documentation is available in:
+
+[`Documentation/Pinout.md`](Documentation/Pinout.md)
+
+The four 19-pin breakout rows are arranged as paired groups:
+
+- One row exposes ESP32 module pins **1–19**
+- The paired row exposes ESP32 module pins **20–38**
+
+This arrangement is repeated for the supported ESP32 board positions.
+
+> The schematic uses the module's physical pin numbers (1–38). It does not label these connections with GPIO names, so the pinout document intentionally preserves the numbering used by the design rather than introducing a separate GPIO mapping.
 
 ## Design Files
 
@@ -140,7 +169,7 @@ KiCad/
 
 ### Fabrication Files
 
-If generated, Gerber and drill files should be placed in:
+The `Fabrication/` directory is intended for files required to reproduce the physical board:
 
 ```text
 Fabrication/
@@ -148,7 +177,19 @@ Fabrication/
 └── BOM/
 ```
 
-These files can be used to reproduce the PCB.
+### Gerbers
+
+Gerber files describe the PCB layers and board geometry used by a PCB manufacturer to fabricate the bare PCB.
+
+### Bill of Materials (BOM)
+
+The BOM lists the components required to assemble the board, including their references, values, footprints, and quantities.
+
+A CSV BOM can be placed in:
+
+```text
+Fabrication/BOM/
+```
 
 ## Repository Structure
 
@@ -169,6 +210,7 @@ ESP32-Prototyping-Breakout/
 │   └── BOM/
 │
 ├── Documentation/
+│   └── Pinout.md
 │
 └── Images/
     ├── 01_esp32_on_breadboard.jpg
@@ -189,12 +231,15 @@ This is a personal prototype and my first custom PCB design.
 
 The physical board was fabricated and assembled for ESP32 prototyping and experimentation.
 
+The current physical prototype has the USB Type-C connector footprint unpopulated because the connector has not yet been sourced.
+
 The board was designed as a practical development aid rather than as a production-ready commercial board.
 
 ## Future Improvements
 
 Possible improvements for a future revision include:
 
+- Populate and validate the USB Type-C connector
 - More clearly standardized pin labels
 - Additional protection circuitry
 - Improved mechanical mounting options
@@ -220,6 +265,5 @@ Computer Science & Engineering
 
 ---
 
-> *PCB #1 — 12+ hours*
->
+> *PCB #1 — 12+ hours*  
 > *May the traces be with you.*
